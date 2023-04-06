@@ -1,0 +1,24 @@
+FROM registry.fedoraproject.org/fedora-toolbox:37
+
+# Update
+RUN set -ex && \
+    sudo dnf -y update
+
+# Install development tools
+RUN set -ex && \
+    sudo dnf -y groupinstall "Development Tools" && \
+    sudo dnf -y install vim podman-compose npm nodejs
+
+# Install Visual Studio Code
+RUN set -ex && \
+    sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc && \
+    sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/vscode.repo' && \
+    sudo dnf -y install code-insiders
+
+# Install Qt
+RUN set ex && \
+    sudo dnf -y install qt-creator qt5-*-devel qt6-*-devel cmake clang clazy ninja-build
+
+RUN set -ex && \
+    sudo ln -s /usr/bin/distrobox-host-exec /usr/local/bin/xdg-open && \
+    sudo ln -s /usr/bin/distrobox-host-exec /usr/local/bin/rpm-ostree
