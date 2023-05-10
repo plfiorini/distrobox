@@ -7,7 +7,7 @@ RUN set -ex && \
 # Install packages
 RUN set -ex && \
     pacman -S --noconfirm \
-              base-devel openssh git vim qt5 qt6 qtcreator cmake \
+              base-devel openssh git vim qt5 qt6 qtcreator cmake boost \
               ninja gdb qt5ct qt6ct repo extra-cmake-modules \
               polkit-qt5 solid libdrm libinput xcb-util-cursor \
               pulseaudio networkmanager-qt modemmanager-qt glib2 \
